@@ -1,0 +1,11 @@
+.rating {
+  font-size: 24px; /* Adjust the size as needed */
+}
+
+.rating span {
+  color: #ccc; /* Default star color */
+}
+
+.rating span.filled {
+  color: #68a26c; /* Filled star color */
+}

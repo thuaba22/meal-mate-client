@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../providers/AuthProvider";
 import ReactPaginate from "react-paginate";
 import "./MealsByCategory.css";
+import Rating from "./Rating";
 const MealsByCategory = () => {
   const [activeCategory, setActiveCategory] = useState("All Meals");
   const [meals, setMeals] = useState([]);
@@ -51,7 +52,7 @@ const MealsByCategory = () => {
       <h2 className="text-5xl text-center text-[#216D30]">
         Explore Your Favorite Meals
       </h2>
-      <hr className="border-2 border-black w-1/4 mx-auto mt-3 mb-4" />
+      <hr className="border-2 border-[#45D62D] w-1/4 mx-auto mt-3 mb-4" />
       <div className="flex flex-col md:flex-row justify-center mt-10 mb-5 gap-5">
         <button
           className={`btn btn-outline btn-success ${
@@ -109,12 +110,12 @@ const MealsByCategory = () => {
                   {meal.meal_category}
                 </div>
               </div>
-              <p className="text-[#3c3c3c] text-[15px]">
-                Admin: {meal.admin_name}
-              </p>
-              <p className="text-[#3c3c3c] text-[15px]">
-                Rating: {meal.rating}
-              </p>
+              <div>
+                <Rating value={meal.rating} />
+                <p className="text-[#68A26C]">
+                  Price: <span className="font-bold">{meal.price} $</span>
+                </p>
+              </div>
               <div className="card-actions justify-end">
                 <Link to={`/mealDetails/${meal.meal_id}`}>
                   <button
