@@ -1,0 +1,426 @@
+[
+  {
+    "meal_id": 1,
+    "title": "Scrambled Eggs with Avocado",
+    "image": "https://i.postimg.cc/FK68gR4t/meal1.jpg",
+    "rating": 4.5,
+    "price": 8.99,
+    "meal_category": "breakfast",
+    "admin_name": "Chef John",
+    "meal_description": "Delicious scrambled eggs served with fresh avocado slices.",
+    "ingredients": ["Eggs", "Avocado", "Salt", "Pepper"],
+    "post_time": "2023-11-23T08:00:00Z",
+    "likes": 120,
+    "reviews": [
+      { "user": "Alice", "comment": "Amazing breakfast!" },
+      { "user": "Bob", "comment": "Best scrambled eggs ever!" }
+    ]
+  },
+  {
+    "meal_id": 2,
+    "title": "Grilled Chicken Salad",
+    "image": "https://i.postimg.cc/76TcBkH5/meal2.jpg",
+    "rating": 4.2,
+    "price": 12.99,
+    "meal_category": "lunch",
+    "admin_name": "Chef Emily",
+    "meal_description": "Healthy and delicious grilled chicken salad with fresh vegetables.",
+    "ingredients": [
+      "Chicken Breast",
+      "Mixed Greens",
+      "Tomato",
+      "Cucumber",
+      "Balsamic Dressing"
+    ],
+    "post_time": "2023-11-23T12:30:00Z",
+    "likes": 90,
+    "reviews": [
+      { "user": "Charlie", "comment": "Perfect lunch option!" },
+      { "user": "David", "comment": "Great balance of flavors." }
+    ]
+  },
+  {
+    "meal_id": 3,
+    "title": "Spaghetti Bolognese",
+    "image": "https://i.postimg.cc/fynPpryB/meal3.jpg",
+    "rating": 4.7,
+    "price": 14.99,
+    "meal_category": "dinner",
+    "admin_name": "Chef Maria",
+    "meal_description": "Classic Italian dish with rich and flavorful Bolognese sauce over spaghetti.",
+    "ingredients": [
+      "Ground Beef",
+      "Tomato Sauce",
+      "Onion",
+      "Garlic",
+      "Spaghetti"
+    ],
+    "post_time": "2023-11-23T18:00:00Z",
+    "likes": 150,
+    "reviews": [
+      { "user": "Eva", "comment": "Absolutely delicious!" },
+      { "user": "Frank", "comment": "Reminds me of Italy." },
+      { "user": "Grace", "comment": "My family loved it!" }
+    ]
+  },
+  {
+    "meal_id": 4,
+    "title": "Vegan Buddha Bowl",
+    "image": "https://i.postimg.cc/PfY9YTVc/meal4.jpg",
+    "rating": 4.0,
+    "price": 10.99,
+    "meal_category": "lunch",
+    "admin_name": "Chef Alex",
+    "meal_description": "A vibrant and nutritious bowl with a variety of plant-based ingredients.",
+    "ingredients": ["Quinoa", "Chickpeas", "Kale", "Carrot", "Avocado"],
+    "post_time": "2023-11-24T12:45:00Z",
+    "likes": 80,
+    "reviews": [
+      { "user": "Hannah", "comment": "Healthy and tasty!" },
+      { "user": "Isaac", "comment": "Great option for vegans." },
+      { "user": "Jack", "comment": "Love the colors and flavors!" }
+    ]
+  },
+  {
+    "meal_id": 5,
+    "title": "Sushi Platter",
+    "image": "https://i.postimg.cc/15STK2Lz/meal5.jpg",
+    "rating": 4.8,
+    "price": 18.99,
+    "meal_category": "dinner",
+    "admin_name": "Sushi Master Ken",
+    "meal_description": "Exquisite selection of sushi rolls and sashimi.",
+    "ingredients": [
+      "Sushi Rice",
+      "Nori",
+      "Fresh Fish",
+      "Vegetables",
+      "Soy Sauce"
+    ],
+    "post_time": "2023-11-24T19:30:00Z",
+    "likes": 200,
+    "reviews": [
+      { "user": "Lily", "comment": "Best sushi in town!" },
+      { "user": "Michael", "comment": "Always fresh and delicious." },
+      { "user": "Nora", "comment": "I'm addicted to this sushi!" }
+    ]
+  },
+  {
+    "meal_id": 6,
+    "title": "Pancake Stack",
+    "image": "https://i.postimg.cc/wTkr4FpQ/meal6.jpg",
+    "rating": 4.4,
+    "price": 7.99,
+    "meal_category": "breakfast",
+    "admin_name": "Chef Sarah",
+    "meal_description": "Fluffy pancakes served with maple syrup and fresh berries.",
+    "ingredients": ["Flour", "Milk", "Eggs", "Baking Powder", "Maple Syrup"],
+    "post_time": "2023-11-25T08:30:00Z",
+    "likes": 110,
+    "reviews": [
+      { "user": "Oliver", "comment": "Perfect breakfast treat!" },
+      { "user": "Penelope", "comment": "These pancakes are heavenly." }
+    ]
+  },
+  {
+    "meal_id": 7,
+    "title": "Caesar Salad",
+    "image": "https://i.postimg.cc/MpKFCRZ2/meal7.jpg",
+    "rating": 4.3,
+    "price": 11.99,
+    "meal_category": "lunch",
+    "admin_name": "Chef James",
+    "meal_description": "Classic Caesar salad with crisp romaine lettuce and homemade dressing.",
+    "ingredients": [
+      "Romaine Lettuce",
+      "Croutons",
+      "Parmesan Cheese",
+      "Caesar Dressing"
+    ],
+    "post_time": "2023-11-25T12:15:00Z",
+    "likes": 95,
+    "reviews": [
+      { "user": "Quinn", "comment": "Always a satisfying choice!" },
+      { "user": "Rachel", "comment": "I could eat this every day." }
+    ]
+  },
+  {
+    "meal_id": 8,
+    "title": "Chicken Alfredo Pasta",
+    "image": "https://i.postimg.cc/9fDNMhqL/meal8.jpg",
+    "rating": 4.6,
+    "price": 15.99,
+    "meal_category": "dinner",
+    "admin_name": "Chef Robert",
+    "meal_description": "Creamy Alfredo pasta with grilled chicken and Parmesan cheese.",
+    "ingredients": [
+      "Fettuccine Pasta",
+      "Chicken Breast",
+      "Heavy Cream",
+      "Garlic",
+      "Parmesan"
+    ],
+    "post_time": "2023-11-25T18:45:00Z",
+    "likes": 180,
+    "reviews": [
+      { "user": "Sam", "comment": "Mouthwatering Alfredo!" },
+      { "user": "Tina", "comment": "A pasta lover's dream." }
+    ]
+  },
+  {
+    "meal_id": 9,
+    "title": "Fruit Smoothie Bowl",
+    "image": "https://i.postimg.cc/nLNS9P4p/meal9.jpg",
+    "rating": 4.1,
+    "price": 9.99,
+    "meal_category": "breakfast",
+    "admin_name": "Chef Mia",
+    "meal_description": "Refreshing smoothie bowl with a medley of fresh fruits and granola.",
+    "ingredients": ["Mixed Berries", "Banana", "Yogurt", "Granola", "Honey"],
+    "post_time": "2023-11-26T09:15:00Z",
+    "likes": 85,
+    "reviews": [
+      { "user": "Ulysses", "comment": "Healthy and delicious start!" },
+      { "user": "Victoria", "comment": "Love the variety of fruits." }
+    ]
+  },
+  {
+    "meal_id": 10,
+    "title": "Mushroom Risotto",
+    "image": "https://i.postimg.cc/1t6CGrB6/meal10.jpg",
+    "rating": 4.9,
+    "price": 16.99,
+    "meal_category": "dinner",
+    "admin_name": "Chef Daniel",
+    "meal_description": "Creamy mushroom risotto with Arborio rice and Parmesan cheese.",
+    "ingredients": [
+      "Arborio Rice",
+      "Mushrooms",
+      "Chicken Broth",
+      "White Wine",
+      "Parmesan"
+    ],
+    "post_time": "2023-11-26T19:00:00Z",
+    "likes": 220,
+    "reviews": [
+      { "user": "Wendy", "comment": "Mushroom lovers, rejoice!" },
+      { "user": "Xander", "comment": "Incredible flavor and texture." }
+    ]
+  },
+  {
+    "meal_id": 11,
+    "title": "Avocado Toast",
+    "image": "https://i.postimg.cc/ZnSfVvsQ/meal11.jpg",
+    "rating": 4.3,
+    "price": 9.99,
+    "meal_category": "breakfast",
+    "admin_name": "Chef Olivia",
+    "meal_description": "Sliced avocado on toasted whole grain bread with a sprinkle of sea salt.",
+    "ingredients": ["Avocado", "Whole Grain Bread", "Sea Salt"],
+    "post_time": "2023-12-03T08:15:00Z",
+    "likes": 100,
+    "reviews": [
+      { "user": "Yasmine", "comment": "Simple and delicious!" },
+      { "user": "Zane", "comment": "My favorite breakfast." },
+      { "user": "Ava", "comment": "Avocado toast perfection!" }
+    ]
+  },
+  {
+    "meal_id": 12,
+    "title": "Caprese Salad",
+    "image": "https://i.postimg.cc/D0PxDftw/meal12.jpg",
+    "rating": 4.6,
+    "price": 13.99,
+    "meal_category": "lunch",
+    "admin_name": "Chef Luca",
+    "meal_description": "Classic Italian Caprese salad with fresh tomatoes, mozzarella, and basil.",
+    "ingredients": ["Tomatoes", "Mozzarella", "Basil", "Balsamic Glaze"],
+    "post_time": "2023-12-03T12:45:00Z",
+    "likes": 120,
+    "reviews": [
+      { "user": "Isabella", "comment": "Tastes like summer!" },
+      { "user": "Ethan", "comment": "Perfect light lunch." },
+      { "user": "Lila", "comment": "Caprese love forever!" }
+    ]
+  },
+  {
+    "meal_id": 13,
+    "title": "BBQ Pulled Pork Sandwich",
+    "image": "https://i.postimg.cc/ZY8s0jCz/meal13.jpg",
+    "rating": 4.4,
+    "price": 14.99,
+    "meal_category": "dinner",
+    "admin_name": "Chef Noah",
+    "meal_description": "Slow-cooked pulled pork in tangy barbecue sauce, served on a soft bun.",
+    "ingredients": ["Pork Shoulder", "BBQ Sauce", "Bun", "Coleslaw"],
+    "post_time": "2023-12-04T18:30:00Z",
+    "likes": 150,
+    "reviews": [
+      { "user": "Mason", "comment": "Best BBQ sandwich in town!" },
+      { "user": "Sophia", "comment": "Mouthwatering goodness." },
+      { "user": "Jackson", "comment": "A barbecue delight!" }
+    ]
+  },
+  {
+    "meal_id": 14,
+    "title": "Eggplant Parmesan",
+    "image": "https://i.postimg.cc/RVvstfH6/meal14.jpg",
+    "rating": 4.7,
+    "price": 16.99,
+    "meal_category": "dinner",
+    "admin_name": "Chef Sofia",
+    "meal_description": "Sliced and breaded eggplant topped with marinara sauce and melted mozzarella.",
+    "ingredients": ["Eggplant", "Bread Crumbs", "Marinara Sauce", "Mozzarella"],
+    "post_time": "2023-12-05T19:15:00Z",
+    "likes": 180,
+    "reviews": [
+      { "user": "Lucas", "comment": "Vegetarian delight!" },
+      { "user": "Emma", "comment": "A classic done perfectly." },
+      { "user": "Owen", "comment": "Eggplant magic!" }
+    ]
+  },
+  {
+    "meal_id": 15,
+    "title": "Blueberry Pancakes",
+    "image": "https://i.postimg.cc/KvQ9DzP9/meal15.jpg",
+    "rating": 4.2,
+    "price": 9.99,
+    "meal_category": "breakfast",
+    "admin_name": "Chef Liam",
+    "meal_description": "Fluffy pancakes bursting with blueberries, served with maple syrup.",
+    "ingredients": [
+      "Flour",
+      "Milk",
+      "Blueberries",
+      "Baking Powder",
+      "Maple Syrup"
+    ],
+    "post_time": "2023-12-06T08:45:00Z",
+    "likes": 95,
+    "reviews": [
+      { "user": "Aiden", "comment": "Perfect breakfast option!" },
+      { "user": "Sophie", "comment": "Blueberry heaven." },
+      { "user": "Logan", "comment": "Pancake delight!" }
+    ]
+  },
+  {
+    "meal_id": 16,
+    "title": "Quinoa Salad Bowl",
+    "image": "https://i.postimg.cc/W135WvSs/meal16.jpg",
+    "rating": 4.5,
+    "price": 11.99,
+    "meal_category": "lunch",
+    "admin_name": "Chef Ava",
+    "meal_description": "Nutrient-packed quinoa salad with fresh vegetables and a zesty dressing.",
+    "ingredients": [
+      "Quinoa",
+      "Cherry Tomatoes",
+      "Cucumber",
+      "Feta Cheese",
+      "Lemon Vinaigrette"
+    ],
+    "post_time": "2023-12-07T12:30:00Z",
+    "likes": 110,
+    "reviews": [
+      { "user": "Jayden", "comment": "Healthy and flavorful!" },
+      { "user": "Mia", "comment": "My go-to lunch." },
+      { "user": "Nathan", "comment": "Quinoa goodness!" }
+    ]
+  },
+  {
+    "meal_id": 17,
+    "title": "Teriyaki Salmon",
+    "image": "https://i.postimg.cc/XYzQtzDd/meal17.jpg",
+    "rating": 4.8,
+    "price": 17.99,
+    "meal_category": "dinner",
+    "admin_name": "Chef Ethan",
+    "meal_description": "Grilled salmon glazed with teriyaki sauce, served with steamed rice and vegetables.",
+    "ingredients": [
+      "Salmon Fillet",
+      "Teriyaki Sauce",
+      "Rice",
+      "Broccoli",
+      "Carrots"
+    ],
+    "post_time": "2023-12-08T18:45:00Z",
+    "likes": 190,
+    "reviews": [
+      { "user": "Aria", "comment": "Melt-in-your-mouth salmon!" },
+      { "user": "Carter", "comment": "Fantastic teriyaki flavor." },
+      { "user": "Sofia", "comment": "Salmon perfection!" }
+    ]
+  },
+  {
+    "meal_id": 18,
+    "title": "Cauliflower Pizza",
+    "image": "https://i.postimg.cc/PxGK58Hq/meal18.jpg",
+    "rating": 4.4,
+    "price": 14.99,
+    "meal_category": "dinner",
+    "admin_name": "Chef Jackson",
+    "meal_description": "Low-carb pizza crust made from cauliflower, topped with tomato sauce and cheese.",
+    "ingredients": [
+      "Cauliflower",
+      "Tomato Sauce",
+      "Mozzarella",
+      "Basil",
+      "Olive Oil"
+    ],
+    "post_time": "2023-12-09T19:30:00Z",
+    "likes": 160,
+    "reviews": [
+      { "user": "Liam", "comment": "Surprisingly delicious!" },
+      { "user": "Emma", "comment": "A guilt-free pizza." },
+      { "user": "Olivia", "comment": "Cauliflower magic!" }
+    ]
+  },
+  {
+    "meal_id": 19,
+    "title": "Chia Seed Pudding",
+    "image": "https://i.postimg.cc/C1j7BLMs/meal19.jpg",
+    "rating": 4.2,
+    "price": 8.99,
+    "meal_category": "breakfast",
+    "admin_name": "Chef Noah",
+    "meal_description": "Creamy chia seed pudding with layers of fruit and granola.",
+    "ingredients": [
+      "Chia Seeds",
+      "Almond Milk",
+      "Mixed Berries",
+      "Granola",
+      "Honey"
+    ],
+    "post_time": "2023-12-10T09:15:00Z",
+    "likes": 85,
+    "reviews": [
+      { "user": "Aiden", "comment": "Healthy and satisfying!" },
+      { "user": "Sophie", "comment": "Perfect breakfast option." },
+      { "user": "Logan", "comment": "Chia goodness!" }
+    ]
+  },
+  {
+    "meal_id": 20,
+    "title": "Beef Stir-Fry",
+    "image": "https://i.postimg.cc/6qt0dJyJ/meal20.jpg",
+    "rating": 4.6,
+    "price": 15.99,
+    "meal_category": "lunch",
+    "admin_name": "Chef Mia",
+    "meal_description": "Savory beef stir-fry with colorful vegetables and soy-ginger sauce.",
+    "ingredients": [
+      "Beef Strips",
+      "Broccoli",
+      "Bell Peppers",
+      "Soy Sauce",
+      "Ginger"
+    ],
+    "post_time": "2023-12-11T12:45:00Z",
+    "likes": 120,
+    "reviews": [
+      { "user": "Chloe", "comment": "Tasty and satisfying!" },
+      { "user": "Jacob", "comment": "Best stir-fry in town." },
+      { "user": "Luna", "comment": "Flavorful and delicious!" }
+    ]
+  }
+]
