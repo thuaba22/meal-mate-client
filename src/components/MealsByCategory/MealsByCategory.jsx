@@ -147,6 +147,11 @@ const MealsByCategory = () => {
         subContainerClassName={"pages pagination"}
         activeClassName={"active"}
       />
+      <div className="w-[10%] mt-10 mx-auto">
+        <button className="btn w-full px-6 btn-outline btn-success">
+          See All
+        </button>
+      </div>
     </div>
   );
 };
