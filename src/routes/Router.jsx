@@ -5,6 +5,8 @@ import Meals from "../pages/Meals/Meals";
 import UpcomingMeals from "../pages/UpcomingMeals/UpcomingMeals";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import MealDetails from "../pages/MealDetails/MealDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const Router = createBrowserRouter([
   {
@@ -30,6 +32,16 @@ const Router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/meal/:mealId",
+        element: (
+          <PrivateRoute>
+            <MealDetails></MealDetails>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/meals/${params.mealId}`),
       },
     ],
   },

@@ -7,6 +7,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import PageTitle from "../../components/shared/PageTitle/PageTitle";
 import Navbar from "../../components/shared/Navbar/Navbar";
 import Footer from "../../components/shared/Footer/Footer";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const { signIn, googleSignIn } = useContext(AuthContext);
@@ -14,44 +15,52 @@ const Login = () => {
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log(e.currentTarget);
-    const form = new FormData(e.currentTarget);
-    const email = form.get("email");
-    const password = form.get("password");
-    setLoginError("");
-    signIn(email, password)
-      .then((result) => {
-        console.log(result.user);
+  const handleLogin = async (data) => {
+    try {
+      setLoginError("");
+      await signIn(data.email, data.password);
 
-        toast("Login successful!");
+      toast("Login successful!");
 
-        const redirectTo = location.state ? location.state.from : "/";
-        setTimeout(() => {
-          navigate(redirectTo);
-        }, 1500);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoginError(error.message);
+      const redirectTo = navigate(location?.state ? location.state : "/");
+      setTimeout(() => {
+        navigate(redirectTo);
+      }, 1500);
+    } catch (error) {
+      console.error(error);
+      setError("form", {
+        type: "manual",
+        message: "Login failed. Please try again.",
       });
+      setLoginError(error.message);
+    }
   };
-  const handleGoogle = () => {
-    googleSignIn().then((result) => {
-      console.log(result.user);
+
+  const handleGoogle = async () => {
+    try {
+      await googleSignIn();
+
       toast.success("Login successful!");
 
       const redirectTo = navigate(location?.state ? location.state : "/");
       setTimeout(() => {
         navigate(redirectTo);
       }, 2000);
-    });
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   return (
     <div>
-      <PageTitle title="JobFindr | Login"></PageTitle>
+      <PageTitle title="MealMate | Join US"></PageTitle>
 
       <Navbar></Navbar>
       <div className="hero container w-full md:min-h-screen  bg-white">
@@ -61,7 +70,7 @@ const Login = () => {
           </div>
           <div className="card  md:w-[500px] border bg-base-100">
             <div className="card-body">
-              <form onSubmit={handleLogin}>
+              <form onSubmit={handleSubmit(handleLogin)}>
                 <h1 className="md:text-3xl text-[#1967d2] text-center font-bold">
                   Login
                 </h1>
@@ -71,11 +80,15 @@ const Login = () => {
                   </label>
                   <input
                     type="email"
-                    name="email"
+                    {...register("email", { required: "Email is required" })}
                     placeholder="email"
-                    className="input input-bordered"
-                    required
+                    className={`input input-bordered ${
+                      errors.email ? "input-error" : ""
+                    }`}
                   />
+                  {errors.email && (
+                    <span className="text-red-500">{errors.email.message}</span>
+                  )}
                 </div>
                 <div className="form-control">
                   <label className="label">
@@ -84,10 +97,13 @@ const Login = () => {
                   <div className="relative">
                     <input
                       type={showPassword ? "text" : "password"}
-                      name="password"
+                      {...register("password", {
+                        required: "Password is required",
+                      })}
                       placeholder="password"
-                      className="input input-bordered w-full"
-                      required
+                      className={`input input-bordered w-full ${
+                        errors.password ? "input-error" : ""
+                      }`}
                     />
                     <span
                       className="absolute top-4 right-2"
@@ -100,7 +116,11 @@ const Login = () => {
                       )}
                     </span>
                   </div>
-
+                  {errors.password && (
+                    <span className="text-red-500">
+                      {errors.password.message}
+                    </span>
+                  )}
                   <label className="label">
                     <a href="#" className="label-text-alt link link-hover">
                       Forgot password?
@@ -129,7 +149,7 @@ const Login = () => {
                   onClick={handleGoogle}
                   className="btn bg-[#1967d2] hover:bg-[#1967d2] text-white w-full"
                 >
-                  <FaGoogle className="text-3xl"></FaGoogle>
+                  <FaGoogle className="text-3xl"></FaGoogle> Login with Google
                 </button>
               </div>
             </div>

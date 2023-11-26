@@ -1,0 +1,23 @@
+[
+  {
+    "package_id": 1,
+    "package_name": "Silver",
+    "package_badge": "https://i.postimg.cc/1XgMKx0p/badgesilver-removebg-preview.png",
+    "package_price": 29.99,
+    "details": "Unlock access to a variety of delicious meals. Enjoy special discounts and offers."
+  },
+  {
+    "package_id": 2,
+    "package_name": "Gold",
+    "package_badge": "https://i.postimg.cc/WbFxgy8h/badge2-removebg-preview.png",
+    "package_price": 49.99,
+    "details": "Upgrade to Gold for exclusive perks! Access premium meals and receive priority service."
+  },
+  {
+    "package_id": 3,
+    "package_name": "Platinum",
+    "package_badge": "https://i.postimg.cc/sXjtWDHr/badge3-removebg-preview.png",
+    "package_price": 79.99,
+    "details": "Experience the ultimate dining experience with Platinum. Enjoy gourmet meals and VIP treatment."
+  }
+]

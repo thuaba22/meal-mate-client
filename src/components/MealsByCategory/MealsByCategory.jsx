@@ -20,7 +20,7 @@ const MealsByCategory = () => {
   };
 
   useEffect(() => {
-    fetch("/public/meals.json")
+    fetch("http://localhost:5000/meals")
       .then((response) => response.json())
       .then((data) => setMeals(data));
   }, []);
@@ -117,7 +117,7 @@ const MealsByCategory = () => {
                 </p>
               </div>
               <div className="card-actions justify-end">
-                <Link to={`/mealDetails/${meal.meal_id}`}>
+                <Link to={`/meal/${meal._id}`}>
                   <button
                     onClick={() => {
                       if (!auth.user) {

@@ -5,6 +5,7 @@ import Banner from "../../components/Banner/Banner";
 import MealsByCategory from "../../components/MealsByCategory/MealsByCategory";
 import Footer from "../../components/shared/Footer/Footer";
 import AboutMealMate from "../../components/AboutMealMate/AboutMealMate";
+import Membership from "../../components/Membership/Membership";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <Banner img={menuImg}></Banner>
       <MealsByCategory></MealsByCategory>
       <AboutMealMate></AboutMealMate>
+      <Membership></Membership>
       <Footer></Footer>
     </div>
   );
