@@ -34,8 +34,25 @@ const Register = () => {
     // create user
     createUser(email, password, name, photoURL)
       .then((result) => {
+        // Extract necessary information
+
         console.log(result.user);
-        toast("Registration successful!"); // Show a success toast message
+        toast("Registration successful!");
+
+        // Send user data to the server
+        fetch("http://localhost:5000/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            name,
+            photoURL,
+          }),
+        });
+
+        // Show a success toast message
         formRef.current.reset();
         return signOut(auth)
           .then(() => {
