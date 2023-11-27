@@ -4,12 +4,16 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../providers/AuthProvider";
 import ReactPaginate from "react-paginate";
+import { RotatingLines } from "react-loader-spinner";
+
 import "./MealsByCategory.css";
 import Rating from "./Rating";
 const MealsByCategory = () => {
   const [activeCategory, setActiveCategory] = useState("All Meals");
   const [meals, setMeals] = useState([]);
   const [filteredMeals, setFilteredMeals] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 5;
   const auth = useContext(AuthContext);
@@ -22,7 +26,10 @@ const MealsByCategory = () => {
   useEffect(() => {
     fetch("http://localhost:5000/meals")
       .then((response) => response.json())
-      .then((data) => setMeals(data));
+      .then((data) => {
+        setMeals(data);
+        setLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -88,51 +95,63 @@ const MealsByCategory = () => {
         </button>
       </div>
       <div className="container mt-10 w-[90%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
-        {currentItems.map((meal) => (
-          <motion.div
-            key={meal.meal_id}
-            className="card bg-[#ECFCE8] border"
-            whileHover={{ scale: 1.02, y: -5 }}
-          >
-            <figure>
-              <img
-                className="h-[200px] w-full"
-                src={meal.image}
-                alt="mealImage"
-              />
-            </figure>
-            <div className="card-body">
-              <div className="flex justify-between items-center">
-                <h2 className="card-title text-[#216D30] text-[18px]">
-                  {meal.title}
-                </h2>
-                <div className="badge bg-[#68A26C] text-white">
-                  {meal.meal_category}
+        {loading ? (
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="96"
+            visible={true}
+          />
+        ) : (
+          currentItems.map((meal) => (
+            <motion.div
+              key={meal.meal_id}
+              className="card bg-[#ECFCE8] border"
+              whileHover={{ scale: 1.02, y: -5 }}
+            >
+              <figure>
+                <img
+                  className="h-[200px] w-full"
+                  src={meal.image}
+                  alt="mealImage"
+                />
+              </figure>
+              <div className="card-body">
+                <div className="flex justify-between items-center">
+                  <h2 className="card-title text-[#216D30] text-[18px]">
+                    {meal.title}
+                  </h2>
+                  <div className="badge bg-[#68A26C] text-white">
+                    {meal.meal_category}
+                  </div>
+                </div>
+                <div>
+                  <Rating value={meal.rating} />
+                  <p className="text-[#68A26C]">
+                    Price: <span className="font-bold">{meal.price} $</span>
+                  </p>
+                </div>
+                <div className="card-actions justify-end">
+                  <Link to={`/meal/${meal._id}`}>
+                    <button
+                      onClick={() => {
+                        if (!auth.user) {
+                          toast.error(
+                            "You have to log in first to view details"
+                          );
+                        }
+                      }}
+                      className="btn bg-[#45D62D] hover:bg-[#45D62D] text-white"
+                    >
+                      View Details
+                    </button>
+                  </Link>
                 </div>
               </div>
-              <div>
-                <Rating value={meal.rating} />
-                <p className="text-[#68A26C]">
-                  Price: <span className="font-bold">{meal.price} $</span>
-                </p>
-              </div>
-              <div className="card-actions justify-end">
-                <Link to={`/meal/${meal._id}`}>
-                  <button
-                    onClick={() => {
-                      if (!auth.user) {
-                        toast.error("You have to log in first to view details");
-                      }
-                    }}
-                    className="btn bg-[#45D62D] hover:bg-[#45D62D] text-white"
-                  >
-                    View Details
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))
+        )}
       </div>
       <ReactPaginate
         previousLabel={"Previous"}

@@ -52,7 +52,7 @@ const Register = () => {
   };
   return (
     <div>
-      <PageTitle title="JobFindr | Register"></PageTitle>
+      <PageTitle title="MealMate | Register"></PageTitle>
 
       <Navbar></Navbar>
       <div className="hero min-h-screen  bg-white">

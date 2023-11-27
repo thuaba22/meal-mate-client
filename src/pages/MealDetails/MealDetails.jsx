@@ -9,6 +9,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useState } from "react";
+import PageTitle from "../../components/shared/PageTitle/PageTitle";
 
 const MealDetails = () => {
   // Fetch meal details using useLoaderData hook
@@ -50,6 +51,8 @@ const MealDetails = () => {
 
   return (
     <div>
+      <PageTitle title="MealMate | Meal Details"></PageTitle>
+
       {/* Navbar component */}
       <Navbar></Navbar>
 
