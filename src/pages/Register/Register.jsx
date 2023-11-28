@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -13,6 +13,7 @@ const Register = () => {
   const { createUser } = useContext(AuthContext);
   const [registerError, setRegisterError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
   const formRef = useRef(null);
   const handleRegister = (e) => {
     e.preventDefault();
@@ -40,7 +41,7 @@ const Register = () => {
         toast("Registration successful!");
 
         // Send user data to the server
-        fetch("http://localhost:5000/register", {
+        fetch("http://localhost:5000/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -74,7 +75,6 @@ const Register = () => {
       <Navbar></Navbar>
       <div className="hero min-h-screen  bg-white">
         <div className="hero-content flex">
-          <ToastContainer></ToastContainer>
           <div>
             <img src="https://i.postimg.cc/qMmhPnzP/register.png" alt="" />
           </div>

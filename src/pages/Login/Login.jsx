@@ -45,10 +45,20 @@ const Login = () => {
 
   const handleGoogle = async () => {
     try {
-      await googleSignIn();
-
+      const { user } = await googleSignIn();
       toast.success("Login successful!");
-
+      const { email, displayName: name, photoURL } = user;
+      fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          name,
+          photoURL,
+        }),
+      });
       const redirectTo = navigate(location?.state ? location.state : "/");
       setTimeout(() => {
         navigate(redirectTo);

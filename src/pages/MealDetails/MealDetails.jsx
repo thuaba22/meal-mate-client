@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Navbar from "../../components/shared/Navbar/Navbar";
 import Rating from "../../components/MealsByCategory/Rating";
 import { FaThumbsUp } from "react-icons/fa";
@@ -18,6 +18,7 @@ const MealDetails = () => {
   // Fetch meal details using useLoaderData hook
   const meals = useLoaderData();
   const auth = useContext(AuthContext);
+  const navigate = useNavigate();
 
   // State variable to track the number of likes
   const [likes, setLikes] = useState(meals.likes);
@@ -27,6 +28,9 @@ const MealDetails = () => {
 
   const [reviewText, setReviewText] = useState("");
   const [reviews, setReviews] = useState(meals.reviews);
+
+  // State variable to track the meal request status
+
   // Function to handle the like button click
   const handleLike = async () => {
     try {
@@ -86,6 +90,34 @@ const MealDetails = () => {
     }
   };
 
+  const handleMealRequest = async () => {
+    try {
+      // Check if the meal has already been requested
+      // Fetch user data to check the badge
+      const userResponse = await fetch(
+        `http://localhost:5000/users/${auth.user.email}`
+      );
+      const userData = await userResponse.json();
+      console.log(userData);
+
+      // Check the user's badge
+      if (userData.badge === "Bronze") {
+        // If the user has a bronze badge, deny the meal request
+        toast("You have a Bronze badge. Consider buying a package!");
+        // Redirect the user to the home page
+        const redirectTo = navigate(location?.state ? location.state : "/");
+        setTimeout(() => {
+          navigate(redirectTo);
+        }, 1500);
+        // You should replace this with your actual logic for redirecting
+
+        return;
+      }
+    } catch (error) {
+      console.error("Failed to request meal.", error);
+    }
+  };
+
   return (
     <div>
       <PageTitle title="MealMate | Meal Details"></PageTitle>
@@ -106,7 +138,10 @@ const MealDetails = () => {
           <Rating value={meals.rating} />
 
           {/* Request A Meal button */}
-          <button className="btn btn-outline bg-[#45D62D] text-white">
+          <button
+            onClick={handleMealRequest}
+            className="btn btn-outline bg-[#45D62D] text-white"
+          >
             Request A Meal
           </button>
           {/* Open the modal using document.getElementById('ID').showModal() method */}

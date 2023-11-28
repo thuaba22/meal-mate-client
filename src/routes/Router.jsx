@@ -7,6 +7,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import MealDetails from "../pages/MealDetails/MealDetails";
 import PrivateRoute from "./PrivateRoute";
+import CheckOut from "../pages/CheckOut/CheckOut";
 
 const Router = createBrowserRouter([
   {
@@ -20,6 +21,14 @@ const Router = createBrowserRouter([
       {
         path: "/meals",
         element: <Meals></Meals>,
+      },
+      {
+        path: "/checkout",
+        element: (
+          <PrivateRoute>
+            <CheckOut></CheckOut>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/upcomingMeals",
