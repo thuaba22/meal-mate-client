@@ -23,12 +23,14 @@ const Router = createBrowserRouter([
         element: <Meals></Meals>,
       },
       {
-        path: "/checkout",
+        path: "/checkout/:packagesId",
         element: (
           <PrivateRoute>
             <CheckOut></CheckOut>
           </PrivateRoute>
         ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/premium/${params.packagesId}`),
       },
       {
         path: "/upcomingMeals",
