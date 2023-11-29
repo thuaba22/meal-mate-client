@@ -4,7 +4,7 @@ import { TypeAnimation } from "react-type-animation";
 const AboutMealMate = () => {
   return (
     <div className="hero mt-20 mb-20 h-[700px] md:h-[800px] lg:h-[600px] bg-[#216D30]">
-      <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="hero-content flex-col gap-6 lg:flex-row-reverse">
         <div className="text-center text-white lg:text-left">
           <TypeAnimation
             sequence={[
@@ -40,6 +40,7 @@ const AboutMealMate = () => {
         </div>
         <motion.div whileHover={{ scale: 1.02, y: -5 }}>
           <img
+            className=""
             src="https://i.postimg.cc/gjqfShCT/students-having-lunch-canteen.jpg"
             alt=""
           />

@@ -30,7 +30,7 @@ const MealDetails = () => {
   const [reviews, setReviews] = useState(meals.reviews);
 
   // State variable to track the meal request status
-
+  const [mealRequestStatus, setMealRequestStatus] = useState("NotRequested");
   // Function to handle the like button click
   const handleLike = async () => {
     try {
@@ -92,26 +92,41 @@ const MealDetails = () => {
 
   const handleMealRequest = async () => {
     try {
-      // Check if the meal has already been requested
-      // Fetch user data to check the badge
       const userResponse = await fetch(
         `http://localhost:5000/users/${auth.user.email}`
       );
       const userData = await userResponse.json();
-      console.log(userData);
 
-      // Check the user's badge
       if (userData.badge === "Bronze") {
-        // If the user has a bronze badge, deny the meal request
         toast("You have a Bronze badge. Consider buying a package!");
-        // Redirect the user to the home page
         const redirectTo = navigate(location?.state ? location.state : "/");
         setTimeout(() => {
           navigate(redirectTo);
         }, 1500);
-        // You should replace this with your actual logic for redirecting
-
         return;
+      }
+
+      setMealRequestStatus("Pending");
+
+      const response = await fetch(
+        "http://localhost:5000/meals/request-multiple",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            meals,
+            userData,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        // Display a toast message
+        toast("Meal request sent successfully!");
+      } else {
+        console.error("Failed to send meal request.");
       }
     } catch (error) {
       console.error("Failed to request meal.", error);
@@ -138,12 +153,19 @@ const MealDetails = () => {
           <Rating value={meals.rating} />
 
           {/* Request A Meal button */}
-          <button
-            onClick={handleMealRequest}
-            className="btn btn-outline bg-[#45D62D] text-white"
-          >
-            Request A Meal
-          </button>
+          {mealRequestStatus === "Pending" ? (
+            <button className="btn btn-outline bg-gray-400 text-white cursor-not-allowed">
+              Pending
+            </button>
+          ) : (
+            <button
+              onClick={handleMealRequest}
+              className="btn btn-outline bg-[#45D62D] text-white"
+            >
+              Request A Meal
+            </button>
+          )}
+
           {/* Open the modal using document.getElementById('ID').showModal() method */}
           <button
             className="btn btn-outline bg-[#45D62D] text-white"

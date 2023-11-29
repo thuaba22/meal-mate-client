@@ -76,12 +76,15 @@ const Login = () => {
       <div className="hero container w-full md:min-h-screen  bg-white">
         <div className="hero-content flex">
           <div>
-            <img src="https://i.postimg.cc/2yctBcKr/login.png" alt="" />
+            <img
+              src="https://i.postimg.cc/bvXNsPHb/mobile-login-concept-illustration-114360-232.png"
+              alt=""
+            />
           </div>
           <div className="card  md:w-[500px] border bg-base-100">
             <div className="card-body">
               <form onSubmit={handleSubmit(handleLogin)}>
-                <h1 className="md:text-3xl text-[#1967d2] text-center font-bold">
+                <h1 className="md:text-3xl text-[#216D30] text-center font-bold">
                   Login
                 </h1>
                 <div className="form-control">
@@ -120,9 +123,9 @@ const Login = () => {
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? (
-                        <FaEyeSlash className="text-[#1967d2]"></FaEyeSlash>
+                        <FaEyeSlash className="text-[#216D30]"></FaEyeSlash>
                       ) : (
-                        <FaEye className="text-[#1967d2]"></FaEye>
+                        <FaEye className="text-[#216D30]"></FaEye>
                       )}
                     </span>
                   </div>
@@ -138,14 +141,14 @@ const Login = () => {
                   </label>
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn bg-[#1967d2] hover:bg-[#1967d2] text-white mb-1">
+                  <button className="btn bg-[#45D62D] hover:bg-[#45D62D] text-white mb-1">
                     Login
                   </button>
-                  {loginError && <p className="text-[#1967d2]">{loginError}</p>}
+                  {loginError && <p className="text-[#216D30]">{loginError}</p>}
                   <p className="block mb-5 text-center text-base font-normal leading-relaxed text-gray-700 antialiased">
                     Don&#39;t have an account? Please{" "}
                     <Link
-                      className="font-medium text-black transition-colors hover:text-[#1967d2]"
+                      className="font-medium text-black transition-colors hover:text-[#216D30]"
                       to="/register"
                     >
                       Register
@@ -157,7 +160,7 @@ const Login = () => {
               <div className="mt-5">
                 <button
                   onClick={handleGoogle}
-                  className="btn bg-[#1967d2] hover:bg-[#1967d2] text-white w-full"
+                  className="btn bg-[#45D62D] hover:bg-[#45D62D] text-white w-full"
                 >
                   <FaGoogle className="text-3xl"></FaGoogle> Login with Google
                 </button>

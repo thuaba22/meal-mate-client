@@ -8,6 +8,10 @@ import Register from "../pages/Register/Register";
 import MealDetails from "../pages/MealDetails/MealDetails";
 import PrivateRoute from "./PrivateRoute";
 import CheckOut from "../pages/CheckOut/CheckOut";
+import Dashboard from "../layouts/Dashboard";
+import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
+import MyRequestMeal from "../pages/Dashboard/MyRequestMeal/MyRequestMeal";
+import MyReviews from "../pages/Dashboard/MyReviews/MyReviews";
 
 const Router = createBrowserRouter([
   {
@@ -53,6 +57,25 @@ const Router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/meals/${params.mealId}`),
+      },
+    ],
+  },
+
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "/dashboard/my-profile",
+        element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "/dashboard/requested-meals",
+        element: <MyRequestMeal></MyRequestMeal>,
+      },
+      {
+        path: "/dashboard/my-reviews",
+        element: <MyReviews></MyReviews>,
       },
     ],
   },

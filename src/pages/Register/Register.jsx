@@ -76,11 +76,14 @@ const Register = () => {
       <div className="hero min-h-screen  bg-white">
         <div className="hero-content flex">
           <div>
-            <img src="https://i.postimg.cc/qMmhPnzP/register.png" alt="" />
+            <img
+              src="https://i.postimg.cc/bvXNsPHb/mobile-login-concept-illustration-114360-232.png"
+              alt=""
+            />
           </div>
           <div className="card  md:w-[500px] border bg-base-100">
             <form ref={formRef} onSubmit={handleRegister} className="card-body">
-              <h1 className="text-3xl text-[#1967d2] font-bold">Sign Up</h1>
+              <h1 className="text-3xl text-[#216D30] font-bold">Sign Up</h1>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -171,7 +174,7 @@ const Register = () => {
                     <p className="flex items-center font-sans text-sm font-normal leading-normal text-gray-700 antialiased">
                       I agree the
                       <a
-                        className="font-medium transition-colors hover:text-[#1967d2]"
+                        className="font-medium transition-colors hover:text-[#216D30]"
                         href="#"
                       >
                         &nbsp;Terms and Conditions
@@ -180,17 +183,17 @@ const Register = () => {
                   </label>
                 </div>
                 {registerError && (
-                  <p className="text-[#1967d2]">{registerError}</p>
+                  <p className="text-[#216D30]">{registerError}</p>
                 )}
               </div>
               <div className="form-control mt-6">
-                <button className="btn bg-[#1967d2] hover:bg-[#1967d2] text-white">
+                <button className="btn bg-[#45D62D] hover:bg-[#45D62D] text-white">
                   Register
                 </button>
                 <p className="mt-4 block text-center text-base font-normal leading-relaxed text-gray-700 antialiased">
                   Already have an account?
                   <Link
-                    className="font-medium text-black transition-colors hover:text-[#1967d2]"
+                    className="font-medium text-black transition-colors hover:text-[#216D30]"
                     to="/login"
                   >
                     Log In
