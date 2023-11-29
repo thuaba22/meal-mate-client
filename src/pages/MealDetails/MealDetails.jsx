@@ -70,6 +70,7 @@ const MealDetails = () => {
           mealId: meals._id,
           user: auth.user.displayName,
           comment: reviewText,
+          email: auth.user.email,
         }),
       });
 
