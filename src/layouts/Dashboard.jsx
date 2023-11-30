@@ -9,9 +9,10 @@ import { NavLink, Outlet } from "react-router-dom";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { GiMeal } from "react-icons/gi";
 import { GiHotMeal } from "react-icons/gi";
+import useAdminStatus from "../hooks/useAdmin";
 
 const Dashboard = () => {
-  const isAdmin = true;
+  const { isAdmin } = useAdminStatus();
   return (
     <div className="flex">
       <div className="w-64 min-h-screen  text-white bg-[#216D30]">

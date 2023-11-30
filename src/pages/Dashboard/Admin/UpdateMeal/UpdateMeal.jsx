@@ -1,35 +1,56 @@
-import { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import Footer from "../../../../components/shared/Footer/Footer";
 import Navbar from "../../../../components/shared/Navbar/Navbar";
 import PageTitle from "../../../../components/shared/PageTitle/PageTitle";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
+import { useForm } from "react-hook-form";
 import { TagsInput } from "react-tag-input-component";
-const AddMeals = () => {
-  const { register, handleSubmit, setValue, watch, reset } = useForm();
-  const [mealType, setMealType] = useState("breakfast"); // Default meal type
+import { useParams } from "react-router-dom";
+
+// eslint-disable-next-line react/prop-types
+const UpdateMeal = () => {
+  const { mealId } = useParams();
+  const { register, handleSubmit, setValue, reset, watch } = useForm();
+  const [mealType, setMealType] = useState("breakfast");
   const auth = useContext(AuthContext);
   const [selected, setSelected] = useState([]);
   const [formData, setFormData] = useState(null);
-  const handleDateChange = (date, name) => {
-    setValue(name, date);
+
+  useEffect(() => {
+    // Fetch meal data based on mealId and populate the form
+    fetch(`http://localhost:5000/meals/${mealId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setFormData(data);
+        // Set form values using setValue
+        Object.keys(data).forEach((key) => {
+          setValue(key, data[key]);
+        });
+        // Set selected tags
+        setSelected(data.ingredients);
+        // Set meal type
+        setMealType(data.meal_category);
+      })
+      .catch((error) => {
+        console.error("Error fetching meal data: ", error);
+      });
+  }, [mealId, setValue]);
+
+  const handleDateChange = (e) => {
+    setValue("post_time", e.target.value);
   };
+
   const onSubmit = (data) => {
     // Set the form data in the state
     setFormData(data);
-  };
-  const handleAddMeal = (isUpcoming) => {
+
+    // Ensure that formData is defined
     if (!formData) {
       // Handle the case where form data is not defined
       console.error("Form data is not defined.");
       return;
     }
-
-    // Extracting selected values
-    const data = formData;
 
     // Set the ingredients field in the form data
     data.ingredients = selected;
@@ -39,16 +60,9 @@ const AddMeals = () => {
     data.reviews = parseInt(data.reviews);
     data.likes = parseInt(data.likes);
 
-    // Add a flag to indicate if it's an upcoming meal
-    data.isUpcoming = isUpcoming;
-
-    // Make API request to post meal data to the appropriate collection
-    const endpoint = isUpcoming
-      ? "http://localhost:5000/upcoming-meals"
-      : "http://localhost:5000/meals";
-
-    fetch(endpoint, {
-      method: "POST",
+    // Make API request to update meal data
+    fetch(`http://localhost:5000/meals/${mealId}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -57,23 +71,23 @@ const AddMeals = () => {
       .then((res) => res.json())
       .then((responseData) => {
         console.log(responseData);
-        if (responseData.insertedId) {
-          toast.success("Meal Added Successfully!");
-          reset();
+        if (responseData.success) {
+          toast.success("Meal Updated Successfully!");
+          reset(); // Reset the form after successful update
         }
       });
   };
 
   return (
     <div>
-      <PageTitle title="Meal Mate | Add Meals"></PageTitle>
+      <PageTitle title="Meal Mate | Update Meal"></PageTitle>
 
       <Navbar></Navbar>
       <div className="bg-white p-10">
         <h2 className="text-5xl font-bold text-center text-[#216D30]">
-          Add A Meal
+          Update Meal
         </h2>
-        <hr className="border-2 border-[#45D62D] w-[100px] mx-auto mt-3 mb-4" />{" "}
+        <hr className="border-2 border-[#45D62D] w-[100px] mx-auto mt-3 mb-4" />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-8">
             <div className="form-control w-full">
@@ -111,6 +125,8 @@ const AddMeals = () => {
               </label>
             </div>
           </div>
+
+          {/* Add other form controls here */}
           <div className="mb-8">
             <div className="form-control w-full">
               <label className="label">
@@ -199,13 +215,13 @@ const AddMeals = () => {
                 <span className="label-text text-[#216D30]">Time/Date</span>
               </label>
               <label className="input-group">
-                <DatePicker
+                <input
+                  type="datetime-local"
                   className="border-2"
-                  showIcon
-                  selected={watch("post_time")}
-                  onChange={(date) => handleDateChange(date, "post_time")}
-                  isClearable
-                  placeholderText="Select Time/Date"
+                  name="post_time"
+                  defaultValue={watch("post_time")}
+                  onChange={handleDateChange}
+                  placeholder="Select Time/Date"
                 />
               </label>
             </div>
@@ -286,19 +302,13 @@ const AddMeals = () => {
               </label>
             </div>
           </div>
+
           <input
             type="submit"
-            value="Add Meal"
+            value="Update Meal"
             className="btn bg-[#45D62D] hover:bg-[#45D62D] text-white btn-block"
-            onClick={() => handleAddMeal(false)}
             required
           />
-          <button
-            className="btn bg-[#45D62D] hover:bg-[#45D62D] text-white btn-block"
-            onClick={() => handleAddMeal(true)}
-          >
-            Add to Upcoming Meal
-          </button>
         </form>
       </div>
       <Footer></Footer>
@@ -306,4 +316,4 @@ const AddMeals = () => {
   );
 };
 
-export default AddMeals;
+export default UpdateMeal;

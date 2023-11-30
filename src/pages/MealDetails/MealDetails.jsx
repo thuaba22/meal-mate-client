@@ -254,7 +254,7 @@ const MealDetails = () => {
           {/* Reviews using Swiper */}
           <div className="mt-4 text-[#68a26c] text-md font-semibold">
             <p>Reviews: </p>
-            {reviews.length > 0 ? (
+            {reviews?.length > 0 ? (
               <Swiper
                 navigation={true}
                 modules={[Navigation]}
