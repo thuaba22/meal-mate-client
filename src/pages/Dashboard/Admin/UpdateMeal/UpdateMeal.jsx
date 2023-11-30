@@ -71,7 +71,7 @@ const UpdateMeal = () => {
       .then((res) => res.json())
       .then((responseData) => {
         console.log(responseData);
-        if (responseData.success) {
+        if (responseData.message) {
           toast.success("Meal Updated Successfully!");
           reset(); // Reset the form after successful update
         }

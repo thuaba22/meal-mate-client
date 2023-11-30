@@ -17,6 +17,7 @@ import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import AddMeal from "../pages/Dashboard/Admin/AddMeal/AddMeal";
 import AllMeal from "../pages/Dashboard/Admin/AllMeal/AllMeal";
 import UpdateMeal from "../pages/Dashboard/Admin/UpdateMeal/UpdateMeal";
+import ServeMeals from "../pages/Dashboard/Admin/ServeMeals/ServeMeals";
 
 const Router = createBrowserRouter([
   {
@@ -93,6 +94,10 @@ const Router = createBrowserRouter([
       {
         path: "/dashboard/update-meal/:mealId",
         element: <UpdateMeal></UpdateMeal>,
+      },
+      {
+        path: "/dashboard/serve-meals",
+        element: <ServeMeals></ServeMeals>,
       },
       {
         path: "/dashboard/requested-meals",
