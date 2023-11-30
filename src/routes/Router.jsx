@@ -12,6 +12,10 @@ import Dashboard from "../layouts/Dashboard";
 import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import MyRequestMeal from "../pages/Dashboard/MyRequestMeal/MyRequestMeal";
 import MyReviews from "../pages/Dashboard/MyReviews/MyReviews";
+import AdminProfile from "../pages/Dashboard/Admin/AdminProfile/AdminProfile";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import AddMeal from "../pages/Dashboard/Admin/AddMeal/AddMeal";
+import AllMeal from "../pages/Dashboard/Admin/AllMeal/AllMeal";
 
 const Router = createBrowserRouter([
   {
@@ -68,6 +72,22 @@ const Router = createBrowserRouter([
       {
         path: "/dashboard/my-profile",
         element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "/dashboard/admin-profile",
+        element: <AdminProfile></AdminProfile>,
+      },
+      {
+        path: "/dashboard/manage-users",
+        element: <ManageUsers></ManageUsers>,
+      },
+      {
+        path: "/dashboard/add-meal",
+        element: <AddMeal></AddMeal>,
+      },
+      {
+        path: "/dashboard/all-meals",
+        element: <AllMeal></AllMeal>,
       },
       {
         path: "/dashboard/requested-meals",
