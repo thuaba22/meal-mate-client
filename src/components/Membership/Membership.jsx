@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import PageTitle from "../shared/PageTitle/PageTitle";
 
 const Membership = () => {
   const [packages, setPackages] = useState([]);
@@ -16,8 +15,6 @@ const Membership = () => {
 
   return (
     <div className="mt-24 mb-24">
-      <PageTitle title="MealMate | Checkout"></PageTitle>
-
       <p className="text-[#68A26C] mb-4 text-center">---Membership---</p>
       <h2 className="text-5xl text-center text-[#216D30]">
         Explore Our Membership Packages

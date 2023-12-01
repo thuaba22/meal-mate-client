@@ -18,11 +18,14 @@ import AddMeal from "../pages/Dashboard/Admin/AddMeal/AddMeal";
 import AllMeal from "../pages/Dashboard/Admin/AllMeal/AllMeal";
 import UpdateMeal from "../pages/Dashboard/Admin/UpdateMeal/UpdateMeal";
 import ServeMeals from "../pages/Dashboard/Admin/ServeMeals/ServeMeals";
+import UpcomingAdmin from "../pages/Dashboard/Admin/UpcomingAdmin/UpcomingAdmin";
+import Error from "../pages/ErrorPage/ErrorPage";
 
 const Router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -98,6 +101,10 @@ const Router = createBrowserRouter([
       {
         path: "/dashboard/serve-meals",
         element: <ServeMeals></ServeMeals>,
+      },
+      {
+        path: "/dashboard/upcoming-meals",
+        element: <UpcomingAdmin></UpcomingAdmin>,
       },
       {
         path: "/dashboard/requested-meals",

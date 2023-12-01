@@ -14,14 +14,16 @@ const Meals = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     setTimeout(() => {
+      // Fetch meals data from the server
       fetch("http://localhost:5000/meals")
         .then((response) => response.json())
         .then((data) => {
           setMeals(data);
-          setFilteredMeals(data); // Initially, set filteredMeals to all meals
+          setFilteredMeals(data);
           setLoading(false);
 
           // Extract unique categories from meals
@@ -43,23 +45,32 @@ const Meals = () => {
   }, []);
 
   useEffect(() => {
-    // Filter meals based on the search query
-    const filtered = meals.filter((meal) =>
-      meal.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    // Filter meals based on the selected category
-    if (selectedCategory) {
-      setFilteredMeals(
-        filtered.filter((meal) => meal.meal_category === selectedCategory.value)
+    // Filter meals based on search query and selected category
+    const filtered = meals
+      .filter((meal) =>
+        meal.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+      .filter(
+        (meal) =>
+          !selectedCategory || meal.meal_category === selectedCategory.value
       );
-    } else {
-      setFilteredMeals(filtered);
-    }
+
+    setFilteredMeals(filtered);
   }, [searchQuery, selectedCategory, meals]);
+
+  useEffect(() => {
+    // Filter meals based on the price range
+    const filtered = meals.filter(
+      (meal) =>
+        (!priceRange.min || meal.price >= parseFloat(priceRange.min)) &&
+        (!priceRange.max || meal.price <= parseFloat(priceRange.max))
+    );
+    setFilteredMeals(filtered);
+  }, [priceRange, meals]);
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
+    setCurrentPage(1);
   };
 
   const handlePriceFilter = () => {
@@ -70,13 +81,22 @@ const Meals = () => {
         (!priceRange.max || meal.price <= parseFloat(priceRange.max))
     );
     setFilteredMeals(filtered);
+    setCurrentPage(1);
   };
+
+  const indexOfLastItem = currentPage * 5; // You can adjust this as needed
+  const indexOfFirstItem = indexOfLastItem - 5;
+  const currentItems = filteredMeals.slice(indexOfFirstItem, indexOfLastItem);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(filteredMeals.length / 5); i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div>
-      <PageTitle title="MealMate | Meals"></PageTitle>
-
-      <Navbar></Navbar>
+      <PageTitle title="MealMate | Meals" />
+      <Navbar />
       <div className="mt-20 w-[90%] mx-auto mb-20">
         <div className="overflow-x-auto">
           <div className="flex ml-2 gap-2 items-center">
@@ -144,44 +164,65 @@ const Meals = () => {
               visible={true}
             />
           ) : (
-            <table className="table mt-10">
-              <thead>
-                <tr>
-                  <th>Meal_Image</th>
-                  <th>Title</th>
-                  <th>Meal_Category</th>
-                  <th>Distributor</th>
-                  <th>Meal Posting Date</th>
-                  <th>Price</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredMeals.map((meal) => (
-                  <tr key={meal._id}>
-                    <td>
-                      <img className="w-[100px]" src={meal.image} alt="" />
-                    </td>
-                    <td>{meal.title}</td>
-                    <td>{meal.meal_category}</td>
-                    <td>{meal.admin_name}</td>
-                    <td>{meal.post_time}</td>
-                    <td>{meal.price}$</td>
-                    <td>
-                      <Link to={`/meal/${meal._id}`}>
-                        <button className="btn bg-[#45D62D] text-white hover:bg-[#45D62D] btn-xs">
-                          Details
-                        </button>
-                      </Link>
-                    </td>
+            <div>
+              <table className="table mt-10">
+                <thead>
+                  <tr>
+                    <th>Meal_Image</th>
+                    <th>Title</th>
+                    <th>Meal_Category</th>
+                    <th>Distributor</th>
+                    <th>Meal Posting Date</th>
+                    <th>Price</th>
+                    <th></th>
                   </tr>
+                </thead>
+                <tbody>
+                  {currentItems.map((meal) => (
+                    <tr key={meal._id}>
+                      <td>
+                        <img
+                          className="w-[100px]"
+                          src={meal.image}
+                          alt={meal.title}
+                        />
+                      </td>
+                      <td>{meal.title}</td>
+                      <td>{meal.meal_category}</td>
+                      <td>{meal.admin_name}</td>
+                      <td>{meal.post_time}</td>
+                      <td>{meal.price}$</td>
+                      <td>
+                        <Link to={`/meal/${meal._id}`}>
+                          <button className="btn bg-[#45D62D] text-white hover:bg-[#45D62D] btn-xs">
+                            Details
+                          </button>
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              {/* Pagination controls */}
+              <div className="flex justify-center mt-4">
+                {pageNumbers.map((number) => (
+                  <button
+                    key={number}
+                    onClick={() => setCurrentPage(number)}
+                    className={`btn mx-1 ${
+                      number === currentPage ? "bg-[#45D62D] text-white" : ""
+                    }`}
+                  >
+                    {number}
+                  </button>
                 ))}
-              </tbody>
-            </table>
+              </div>
+            </div>
           )}
         </div>
       </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 };
