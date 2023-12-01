@@ -17,6 +17,7 @@ const AllMeals = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     setTimeout(() => {
@@ -24,7 +25,7 @@ const AllMeals = () => {
         .then((response) => response.json())
         .then((data) => {
           setMeals(data);
-          setFilteredMeals(data); // Initially, set filteredMeals to all meals
+          setFilteredMeals(data);
           setLoading(false);
 
           // Extract unique categories from meals
@@ -61,8 +62,19 @@ const AllMeals = () => {
     }
   }, [searchQuery, selectedCategory, meals]);
 
+  useEffect(() => {
+    // Filter meals based on the price range
+    const filtered = meals.filter(
+      (meal) =>
+        (!priceRange.min || meal.price >= parseFloat(priceRange.min)) &&
+        (!priceRange.max || meal.price <= parseFloat(priceRange.max))
+    );
+    setFilteredMeals(filtered);
+  }, [priceRange, meals]);
+
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
+    setCurrentPage(1);
   };
 
   const handlePriceFilter = () => {
@@ -73,6 +85,7 @@ const AllMeals = () => {
         (!priceRange.max || meal.price <= parseFloat(priceRange.max))
     );
     setFilteredMeals(filtered);
+    setCurrentPage(1);
   };
 
   const handleDelete = (mealId) => {
@@ -88,7 +101,7 @@ const AllMeals = () => {
           setMeals((prevMeals) =>
             prevMeals.filter((meal) => meal._id !== mealId)
           );
-          toast.success("meal deleted succesfully");
+          toast.success("Meal deleted successfully");
         } else {
           // Handle error
           console.error("Error deleting meal:", responseData.message);
@@ -99,11 +112,20 @@ const AllMeals = () => {
       });
   };
 
+  const indexOfLastItem = currentPage * 6; // You can adjust this as needed
+  const indexOfFirstItem = indexOfLastItem - 6;
+  const currentItems = filteredMeals.slice(indexOfFirstItem, indexOfLastItem);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(filteredMeals.length / 6); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <div>
-      <PageTitle title="MealMate | Meals"></PageTitle>
+      <PageTitle title="MealMate | Dashboard | All Meals" />
 
-      <Navbar></Navbar>
+      <Navbar />
       <div className="mt-20 w-[90%] mx-auto mb-20">
         <div className="overflow-x-auto">
           <div className="flex ml-2 gap-2 items-center">
@@ -171,61 +193,77 @@ const AllMeals = () => {
               visible={true}
             />
           ) : (
-            <table className="table mt-10">
-              <thead>
-                <tr>
-                  <th>Meal_Image</th>
-                  <th>Title</th>
-                  <th>Meal_Category</th>
-                  <th>Distributor</th>
-                  <th>Meal Posting Date</th>
-                  <th>Price</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredMeals.map((meal) => (
-                  <tr key={meal._id}>
-                    <td>
-                      <img className="w-[100px]" src={meal.image} alt="" />
-                    </td>
-                    <td>{meal.title}</td>
-                    <td>{meal.meal_category}</td>
-                    <td>{meal.admin_name}</td>
-                    <td>{meal.post_time}</td>
-                    <td>{meal.price}$</td>
-                    <td>
-                      <Link to={`/meal/${meal._id}`}>
-                        <button className="btn bg-[#45D62D] text-white hover:bg-[#45D62D] btn-xs">
-                          Details
-                        </button>
-                      </Link>
-                    </td>
-                    <td>
-                      <Link to={`/dashboard/update-meal/${meal._id}`}>
-                        <button className="btn bg-[#45D62D] text-white hover:bg-[#45D62D] btn-xs">
-                          <FaRegEdit />
-                        </button>
-                      </Link>
-                    </td>
-                    <td>
-                      <Link>
-                        <button
-                          onClick={() => handleDelete(meal._id)}
-                          className="btn bg-[#45D62D] text-white hover:bg-[#45D62D] btn-xs"
-                        >
-                          <MdDelete />
-                        </button>
-                      </Link>
-                    </td>
+            <div>
+              <table className="table mt-10">
+                <thead>
+                  <tr>
+                    <th>Meal_Image</th>
+                    <th>Title</th>
+                    <th>Meal_Category</th>
+                    <th>Distributor</th>
+                    <th>Meal Posting Date</th>
+                    <th>Price</th>
+                    <th></th>
                   </tr>
+                </thead>
+                <tbody>
+                  {currentItems.map((meal) => (
+                    <tr key={meal._id}>
+                      <td>
+                        <img className="w-[100px]" src={meal.image} alt="" />
+                      </td>
+                      <td>{meal.title}</td>
+                      <td>{meal.meal_category}</td>
+                      <td>{meal.admin_name}</td>
+                      <td>{meal.post_time}</td>
+                      <td>{meal.price}$</td>
+                      <td>
+                        <Link to={`/meal/${meal._id}`}>
+                          <button className="btn bg-[#45D62D] text-white hover:bg-[#45D62D] btn-xs">
+                            Details
+                          </button>
+                        </Link>
+                      </td>
+                      <td>
+                        <Link to={`/dashboard/update-meal/${meal._id}`}>
+                          <button className="btn bg-[#45D62D] text-white hover:bg-[#45D62D] btn-xs">
+                            <FaRegEdit />
+                          </button>
+                        </Link>
+                      </td>
+                      <td>
+                        <Link>
+                          <button
+                            onClick={() => handleDelete(meal._id)}
+                            className="btn bg-[#45D62D] text-white hover:bg-[#45D62D] btn-xs"
+                          >
+                            <MdDelete />
+                          </button>
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <div className="mt-4 flex justify-center space-x-2">
+                {pageNumbers.map((number) => (
+                  <button
+                    key={number}
+                    onClick={() => setCurrentPage(number)}
+                    className={`btn ${
+                      number === currentPage ? "bg-[#45D62D] text-white" : ""
+                    }`}
+                  >
+                    {number}
+                  </button>
                 ))}
-              </tbody>
-            </table>
+              </div>
+            </div>
           )}
         </div>
       </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 };
