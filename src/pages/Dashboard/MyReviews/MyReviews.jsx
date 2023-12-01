@@ -6,6 +6,7 @@ import Navbar from "../../../components/shared/Navbar/Navbar";
 import Footer from "../../../components/shared/Footer/Footer";
 import { AwesomeButton } from "react-awesome-button";
 import { toast } from "react-toastify";
+import PageTitle from "../../../components/shared/PageTitle/PageTitle";
 
 const MyReviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -96,6 +97,7 @@ const MyReviews = () => {
   return (
     <div>
       <Navbar />
+      <PageTitle title="MealMate | My Reviews"></PageTitle>
       <div className="mt-20 w-[90%] mx-auto mb-20">
         <div className="overflow-x-auto">
           {/* Loading spinner or reviews table */}

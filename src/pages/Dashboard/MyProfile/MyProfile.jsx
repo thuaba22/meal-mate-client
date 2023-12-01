@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import PageTitle from "../../../components/shared/PageTitle/PageTitle";
 
 const MyProfile = () => {
   const auth = useContext(AuthContext);
@@ -33,6 +34,7 @@ const MyProfile = () => {
 
   return (
     <div className="mt-10">
+      <PageTitle title="MealMate | My Profile"></PageTitle>
       <h2 className="text-5xl font-bold text-center text-[#216D30]">
         My Profile
       </h2>
