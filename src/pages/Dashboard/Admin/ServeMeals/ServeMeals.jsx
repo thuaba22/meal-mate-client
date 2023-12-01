@@ -3,10 +3,11 @@ import { toast } from "react-toastify";
 
 const ServeMeals = () => {
   const [requestedMeals, setRequestedMeals] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     // Fetch requested meals from your API endpoint
-    fetch("http://localhost:5000/meals/request")
+    fetch(`http://localhost:5000/meals/request?page=${currentPage}`)
       .then((response) => response.json())
       .then((data) => {
         setRequestedMeals(data);
@@ -14,7 +15,7 @@ const ServeMeals = () => {
       .catch((error) => {
         console.error("Error fetching requested meals: ", error);
       });
-  }, []);
+  }, [currentPage]);
 
   const handleServeClick = (mealId) => {
     // Update the status of the meal to "Delivered"
@@ -45,6 +46,10 @@ const ServeMeals = () => {
         console.error("Error serving meal: ", error);
         toast.error("Failed to serve meal. Please try again.");
       });
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -87,6 +92,19 @@ const ServeMeals = () => {
           ))}
         </tbody>
       </table>
+      <div className="mt-4 flex justify-center space-x-2">
+        {[...Array(5).keys()].map((number) => (
+          <button
+            key={number + 1}
+            onClick={() => handlePageChange(number + 1)}
+            className={`btn ${
+              number + 1 === currentPage ? "bg-[#45D62D] text-white" : ""
+            }`}
+          >
+            {number + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
