@@ -3,10 +3,11 @@ import { toast } from "react-toastify";
 
 const UpcomingAdmin = () => {
   const [upcomingMeals, setUpcomingMeals] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     // Fetch upcoming meals from your API endpoint
-    fetch("http://localhost:5000/upcoming-meals")
+    fetch(`http://localhost:5000/upcoming-meals?page=${currentPage}`)
       .then((response) => response.json())
       .then((data) => {
         setUpcomingMeals(data);
@@ -14,7 +15,7 @@ const UpcomingAdmin = () => {
       .catch((error) => {
         console.error("Error fetching upcoming meals: ", error);
       });
-  }, []);
+  }, [currentPage]);
 
   const handlePublishClick = (mealId) => {
     // Publish the meal if it has at least 10 likes
@@ -41,6 +42,10 @@ const UpcomingAdmin = () => {
         console.error("Error publishing meal: ", error);
         toast.error("Failed to publish meal. Please try again.");
       });
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -78,6 +83,20 @@ const UpcomingAdmin = () => {
           ))}
         </tbody>
       </table>
+
+      <div className="mt-4 flex justify-center space-x-2">
+        {[...Array(5).keys()].map((number) => (
+          <button
+            key={number + 1}
+            onClick={() => handlePageChange(number + 1)}
+            className={`btn ${
+              number + 1 === currentPage ? "bg-[#45D62D] text-white" : ""
+            }`}
+          >
+            {number + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

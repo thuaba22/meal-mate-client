@@ -14,6 +14,9 @@ const MyMealRequest = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [mealToDelete, setMealToDelete] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 5; // Adjust the number of items per page as needed
 
   const customStyles = {
     content: {
@@ -27,21 +30,25 @@ const MyMealRequest = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      const userEmail = auth?.user?.email;
+    const fetchRequestedMeals = async () => {
+      try {
+        const userEmail = auth?.user?.email;
 
-      fetch(`http://localhost:5000/meals/request-multiple/${userEmail}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setRequestedMeals(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching data: ", error);
-          setLoading(false);
-        });
-    }, 2000);
-  }, [auth?.user?.email]);
+        const response = await fetch(
+          `http://localhost:5000/meals/request-multiple/${userEmail}?page=${currentPage}&limit=${itemsPerPage}`
+        );
+        const data = await response.json();
+
+        setRequestedMeals(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+        setLoading(false);
+      }
+    };
+
+    fetchRequestedMeals();
+  }, [auth?.user?.email, currentPage]);
 
   const handleStatusFilterChange = (value) => {
     setStatusFilter(value.value);
@@ -80,6 +87,10 @@ const MyMealRequest = () => {
 
       closeModal();
     }
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -148,6 +159,23 @@ const MyMealRequest = () => {
               </tbody>
             </table>
           )}
+
+          {/* Pagination */}
+          <div className="flex justify-center mt-4">
+            <button
+              className="btn bg-[#45D62D] text-white hover:bg-[#45D62D] btn-xs mx-1"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <button
+              className="btn bg-[#45D62D] text-white hover:bg-[#45D62D] btn-xs mx-1"
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
 

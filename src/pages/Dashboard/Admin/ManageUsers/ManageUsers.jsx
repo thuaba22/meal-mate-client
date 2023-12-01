@@ -4,11 +4,17 @@ const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 5; // Adjust the number of items per page as needed
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:5000/users");
+        const response = await fetch(
+          `http://localhost:5000/users?page=${currentPage}&limit=${itemsPerPage}`
+        );
+
         if (!response.ok) {
           throw new Error("Error fetching users");
         }
@@ -24,7 +30,7 @@ const ManageUsers = () => {
     };
 
     fetchUsers();
-  }, []);
+  }, [currentPage]);
 
   const makeAdmin = async (userId) => {
     try {
@@ -57,6 +63,10 @@ const ManageUsers = () => {
     }
   };
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -70,7 +80,7 @@ const ManageUsers = () => {
       <h2 className="text-5xl mt-10 font-bold text-center text-[#216D30]">
         Manage Users
       </h2>
-      <hr className="border-2 border-[#45D62D] w-[100px] mx-auto mt-3 mb-4" />{" "}
+      <hr className="border-2 border-[#45D62D] w-[100px] mx-auto mt-3 mb-4" />
       <table className="table mt-10">
         <thead>
           <tr>
@@ -103,6 +113,20 @@ const ManageUsers = () => {
           ))}
         </tbody>
       </table>
+
+      <div className="mt-4 flex justify-center space-x-2">
+        {[...Array(5).keys()].map((number) => (
+          <button
+            key={number + 1}
+            onClick={() => handlePageChange(number + 1)}
+            className={`btn ${
+              number + 1 === currentPage ? "bg-[#45D62D] text-white" : ""
+            }`}
+          >
+            {number + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
