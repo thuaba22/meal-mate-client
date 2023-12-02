@@ -14,7 +14,7 @@ const MyProfile = () => {
         // Replace with your server URL
 
         const response = await fetch(
-          `http://localhost:5000/users/${auth.user.email}`
+          `https://meal-mate-server.vercel.app/users/${auth?.user?.email}`
         );
         const userData = await response.json();
 
@@ -30,7 +30,7 @@ const MyProfile = () => {
 
     // Call the fetchUserData function
     fetchUserData();
-  }, [auth.user.email]); // Empty dependency array to ensure the effect runs only once
+  }, [auth?.user?.email]); // Empty dependency array to ensure the effect runs only once
 
   return (
     <div className="mt-10">
@@ -44,7 +44,7 @@ const MyProfile = () => {
         <div className="h-[400px] flex flex-col text-[#216D30] text-md font-semibold justify-center items-center space-y-3 w-[500px] bg-[#ECFCE8] p-4 mt-10 mb-10 mx-auto">
           <img className="rounded-full" src={user.photoURL} alt="Profile" />
           <p>Name: {user.name}</p>
-          <p className="">Email: {user.email}</p>
+          <p className="">Email: {user?.email}</p>
           <div className="badge badge-lg badge-accent badge-outline">
             {user.badge}
           </div>{" "}

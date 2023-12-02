@@ -7,7 +7,9 @@ const UpcomingAdmin = () => {
 
   useEffect(() => {
     // Fetch upcoming meals from your API endpoint
-    fetch(`http://localhost:5000/upcoming-meals?page=${currentPage}`)
+    fetch(
+      `https://meal-mate-server.vercel.app/upcoming-meals?page=${currentPage}`
+    )
       .then((response) => response.json())
       .then((data) => {
         setUpcomingMeals(data);
@@ -19,12 +21,15 @@ const UpcomingAdmin = () => {
 
   const handlePublishClick = (mealId) => {
     // Publish the meal if it has at least 10 likes
-    fetch(`http://localhost:5000/upcoming-meals/publish/${mealId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `https://meal-mate-server.vercel.app/upcoming-meals/publish/${mealId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((responseData) => {
         if (responseData.success) {

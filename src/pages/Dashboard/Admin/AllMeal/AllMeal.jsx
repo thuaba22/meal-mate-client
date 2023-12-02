@@ -21,7 +21,7 @@ const AllMeals = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      fetch("http://localhost:5000/meals")
+      fetch("https://meal-mate-server.vercel.app/meals")
         .then((response) => response.json())
         .then((data) => {
           setMeals(data);
@@ -90,7 +90,7 @@ const AllMeals = () => {
 
   const handleDelete = (mealId) => {
     // Make API request to delete meal
-    fetch(`http://localhost:5000/meals/${mealId}`, {
+    fetch(`https://meal-mate-server.vercel.app/meals/${mealId}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

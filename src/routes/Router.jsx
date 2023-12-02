@@ -20,6 +20,7 @@ import UpdateMeal from "../pages/Dashboard/Admin/UpdateMeal/UpdateMeal";
 import ServeMeals from "../pages/Dashboard/Admin/ServeMeals/ServeMeals";
 import UpcomingAdmin from "../pages/Dashboard/Admin/UpcomingAdmin/UpcomingAdmin";
 import Error from "../pages/ErrorPage/ErrorPage";
+import AllReviewsPage from "../pages/Dashboard/Admin/AllReviews/AllReviews";
 
 const Router = createBrowserRouter([
   {
@@ -43,7 +44,9 @@ const Router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/premium/${params.packagesId}`),
+          fetch(
+            `https://meal-mate-server.vercel.app/premium/${params.packagesId}`
+          ),
       },
       {
         path: "/upcomingMeals",
@@ -65,14 +68,18 @@ const Router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/meals/${params.mealId}`),
+          fetch(`https://meal-mate-server.vercel.app/meals/${params.mealId}`),
       },
     ],
   },
 
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard/my-profile",
@@ -105,6 +112,10 @@ const Router = createBrowserRouter([
       {
         path: "/dashboard/upcoming-meals",
         element: <UpcomingAdmin></UpcomingAdmin>,
+      },
+      {
+        path: "/dashboard/all-reviews",
+        element: <AllReviewsPage></AllReviewsPage>,
       },
       {
         path: "/dashboard/requested-meals",

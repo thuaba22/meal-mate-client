@@ -21,7 +21,7 @@ const MyReviews = () => {
     const userEmail = auth?.user?.email;
 
     fetch(
-      `http://localhost:5000/meals/user-reviews/${userEmail}?page=${currentPage}`
+      `https://meal-mate-server.vercel.app/meals/user-reviews/${userEmail}?page=${currentPage}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -37,7 +37,7 @@ const MyReviews = () => {
   const handleUpdateReview = async (mealId, email, user, comment) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/meals/review/${mealId}`,
+        `https://meal-mate-server.vercel.app/meals/review/${mealId}`,
         {
           method: "PATCH",
           headers: {
@@ -63,7 +63,7 @@ const MyReviews = () => {
   const handleDeleteReview = async (mealId, email, user) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/meals/review/${mealId}`,
+        `https://meal-mate-server.vercel.app/meals/review/${mealId}`,
         {
           method: "DELETE",
           headers: {

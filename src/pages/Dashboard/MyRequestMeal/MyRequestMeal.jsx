@@ -35,7 +35,7 @@ const MyMealRequest = () => {
         const userEmail = auth?.user?.email;
 
         const response = await fetch(
-          `http://localhost:5000/meals/request-multiple/${userEmail}?page=${currentPage}&limit=${itemsPerPage}`
+          `https://meal-mate-server.vercel.app/meals/request-multiple/${userEmail}?page=${currentPage}&limit=${itemsPerPage}`
         );
         const data = await response.json();
 
@@ -68,7 +68,7 @@ const MyMealRequest = () => {
     if (mealToDelete) {
       try {
         const response = await fetch(
-          `http://localhost:5000/meals/request-multiple/${mealToDelete}`,
+          `https://meal-mate-server.vercel.app/meals/request-multiple/${mealToDelete}`,
           {
             method: "DELETE",
           }

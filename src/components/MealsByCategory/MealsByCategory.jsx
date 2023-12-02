@@ -24,7 +24,7 @@ const MealsByCategory = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/meals")
+    fetch("https://meal-mate-server.vercel.app/meals")
       .then((response) => response.json())
       .then((data) => {
         setMeals(data);

@@ -17,7 +17,7 @@ const UpcomingMeals = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      fetch("http://localhost:5000/upcoming-meals")
+      fetch("https://meal-mate-server.vercel.app/upcoming-meals")
         .then((response) => response.json())
         .then((data) => {
           setUpcomingMeals(data);
@@ -86,7 +86,7 @@ const UpcomingMeals = () => {
 
   const handleLike = (mealId) => {
     // Send a request to the server to increment the like count for the given mealId
-    fetch(`http://localhost:5000/upcoming-meals/${mealId}/like`, {
+    fetch(`https://meal-mate-server.vercel.app/upcoming-meals/${mealId}/like`, {
       method: "POST",
     })
       .then((response) => response.json())

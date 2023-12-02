@@ -23,7 +23,7 @@ const CheckOutForm = ({ packageInfo }) => {
     }
 
     const response = await fetch(
-      "http://localhost:5000/create-payment-intent",
+      "https://meal-mate-server.vercel.app/create-payment-intent",
       {
         method: "POST",
         headers: {

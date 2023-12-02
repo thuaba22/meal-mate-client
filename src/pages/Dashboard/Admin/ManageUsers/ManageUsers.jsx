@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { RotatingLines } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -12,7 +14,7 @@ const ManageUsers = () => {
     const fetchUsers = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/users?page=${currentPage}&limit=${itemsPerPage}`
+          `https://meal-mate-server.vercel.app/users?page=${currentPage}&limit=${itemsPerPage}`
         );
 
         if (!response.ok) {
@@ -35,7 +37,7 @@ const ManageUsers = () => {
   const makeAdmin = async (userId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/users/admin/${userId}`,
+        `https://meal-mate-server.vercel.app/users/admin/${userId}`,
         {
           method: "PATCH",
           headers: {
@@ -47,6 +49,7 @@ const ManageUsers = () => {
       const data = await response.json();
 
       if (response.ok) {
+        toast.success("Role created successfully");
         // If the update is successful, update the local state
         setUsers((prevUsers) =>
           prevUsers.map((user) =>
@@ -68,7 +71,15 @@ const ManageUsers = () => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <RotatingLines
+        strokeColor="grey"
+        strokeWidth="5"
+        animationDuration="0.75"
+        width="96"
+        visible={true}
+      />
+    );
   }
 
   if (error) {

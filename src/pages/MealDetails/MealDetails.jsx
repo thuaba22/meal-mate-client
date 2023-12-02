@@ -38,7 +38,7 @@ const MealDetails = () => {
       if (!liked) {
         // Send a PUT request to update the likes for the meal
         const response = await fetch(
-          `http://localhost:5000/meals/like/${meals._id}`,
+          `https://meal-mate-server.vercel.app/meals/like/${meals._id}`,
           {
             method: "PUT",
           }
@@ -61,18 +61,21 @@ const MealDetails = () => {
 
   const handleSubmitReview = async () => {
     try {
-      const response = await fetch("http://localhost:5000/meals/review", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          mealId: meals._id,
-          user: auth.user.displayName,
-          comment: reviewText,
-          email: auth.user.email,
-        }),
-      });
+      const response = await fetch(
+        "https://meal-mate-server.vercel.app/meals/review",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            mealId: meals._id,
+            user: auth.user.displayName,
+            comment: reviewText,
+            email: auth.user.email,
+          }),
+        }
+      );
 
       if (response.ok) {
         // Update the reviews state with the new review
@@ -94,7 +97,7 @@ const MealDetails = () => {
   const handleMealRequest = async () => {
     try {
       const userResponse = await fetch(
-        `http://localhost:5000/users/${auth.user.email}`
+        `https://meal-mate-server.vercel.app/users/${auth.user.email}`
       );
       const userData = await userResponse.json();
 
@@ -110,7 +113,7 @@ const MealDetails = () => {
       setMealRequestStatus("Pending");
 
       const response = await fetch(
-        "http://localhost:5000/meals/request-multiple",
+        "https://meal-mate-server.vercel.app/meals/request-multiple",
         {
           method: "POST",
           headers: {

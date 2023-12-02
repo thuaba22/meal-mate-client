@@ -48,7 +48,7 @@ const Login = () => {
       const { user } = await googleSignIn();
       toast.success("Login successful!");
       const { email, displayName: name, photoURL } = user;
-      fetch("http://localhost:5000/users", {
+      fetch("https://meal-mate-server.vercel.app/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

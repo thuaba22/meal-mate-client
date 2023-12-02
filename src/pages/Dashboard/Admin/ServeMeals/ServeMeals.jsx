@@ -7,7 +7,9 @@ const ServeMeals = () => {
 
   useEffect(() => {
     // Fetch requested meals from your API endpoint
-    fetch(`http://localhost:5000/meals/request?page=${currentPage}`)
+    fetch(
+      `https://meal-mate-server.vercel.app/meals/request?page=${currentPage}`
+    )
       .then((response) => response.json())
       .then((data) => {
         setRequestedMeals(data);
@@ -19,7 +21,7 @@ const ServeMeals = () => {
 
   const handleServeClick = (mealId) => {
     // Update the status of the meal to "Delivered"
-    fetch(`http://localhost:5000/meals/request/${mealId}`, {
+    fetch(`https://meal-mate-server.vercel.app/meals/request/${mealId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

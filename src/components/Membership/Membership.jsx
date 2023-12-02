@@ -5,7 +5,7 @@ const Membership = () => {
   const [packages, setPackages] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/premium")
+    fetch("https://meal-mate-server.vercel.app/premium")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

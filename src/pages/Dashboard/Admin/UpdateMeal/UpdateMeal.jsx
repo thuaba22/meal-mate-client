@@ -19,7 +19,7 @@ const UpdateMeal = () => {
 
   useEffect(() => {
     // Fetch meal data based on mealId and populate the form
-    fetch(`http://localhost:5000/meals/${mealId}`)
+    fetch(`https://meal-mate-server.vercel.app/meals/${mealId}`)
       .then((response) => response.json())
       .then((data) => {
         setFormData(data);
@@ -61,7 +61,7 @@ const UpdateMeal = () => {
     data.likes = parseInt(data.likes);
 
     // Make API request to update meal data
-    fetch(`http://localhost:5000/meals/${mealId}`, {
+    fetch(`https://meal-mate-server.vercel.app/meals/${mealId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

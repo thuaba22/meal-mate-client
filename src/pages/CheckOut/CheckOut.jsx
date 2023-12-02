@@ -4,6 +4,7 @@ import Navbar from "../../components/shared/Navbar/Navbar";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckOutForm from "../../components/CheckOutForm/CheckOutForm";
+import PageTitle from "../../components/shared/PageTitle/PageTitle";
 
 const stripePromise = loadStripe(import.meta.env.VITE_paymentKey);
 
@@ -12,6 +13,7 @@ const CheckOut = () => {
   return (
     <div>
       <Navbar></Navbar>
+      <PageTitle title="Meal Mate | CheckOut"></PageTitle>
       <div className="h-[700px]">
         <div className="flex justify-center gap-3 mt-6 mb-6 items-center">
           <div>

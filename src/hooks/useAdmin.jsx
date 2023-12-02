@@ -11,7 +11,7 @@ const useAdminStatus = () => {
     const fetchAdminStatus = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/users/admin/${userEmail}`
+          `https://meal-mate-server.vercel.app/users/admin/${userEmail}`
         );
         const data = await response.json();
 
