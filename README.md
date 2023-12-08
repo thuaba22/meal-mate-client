@@ -1,8 +1,14 @@
-# React + Vite
+# Project Features
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Admin Dashboard
+- Firebase Authentication
+- Private Route
+- React Helmet usage
+- CRUD Operation
+- Database Powered
+- Active tab
+- filtering by title,catagory,price range
 
-Currently, two official plugins are available:
+# Website Live Link
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+(https://656b3fc89cf6c74cced9d555--sparkling-dango-6628fc.netlify.app)

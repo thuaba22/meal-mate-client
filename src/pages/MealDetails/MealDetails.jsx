@@ -62,7 +62,7 @@ const MealDetails = () => {
   const handleSubmitReview = async () => {
     try {
       const response = await fetch(
-        "https://meal-mate-server.vercel.app/meals/review",
+        "https://meal-mate-server.vercel.app/reviews/byUser",
         {
           method: "POST",
           headers: {
